@@ -18,7 +18,7 @@ pub struct SearchGMPRequest {
 
 impl SearchGMPRequest {
     pub async fn send(&self) -> Result<SearchGMPResponse, Box<dyn std::error::Error>> {
-        log::debug!("sending searchGMP request {self:?}");
+        log::debug!(request = self; "sending searchGMP request");
         let client = reqwest::Client::new();
         let response = client
             .post(format!("{}/searchGMP", BASE_URL))
@@ -27,11 +27,13 @@ impl SearchGMPRequest {
             .await?;
 
         let response_text = response.text().await?;
+        log::debug!(response = response_text; "searchGMP response");
+
         let parsed_response: SearchGMPResponse = serde_json::from_str(&response_text)?;
 
         if let Some(transactions) = &parsed_response.data {
             for (index, transaction) in transactions.iter().enumerate() {
-                log::info!(
+                log::debug!(
                     "Transaction {}: Status: {:?}, Simplified Status: {:?}",
                     index + 1,
                     transaction.status,
@@ -39,7 +41,7 @@ impl SearchGMPRequest {
                 );
             }
         } else {
-            log::info!("No transactions found in the response");
+            log::debug!("No transactions found in the response");
         }
 
         Ok(parsed_response)
@@ -55,7 +57,6 @@ pub struct SearchGMPResponse {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde_alias(CamelCase, SnakeCase)]
-#[serde()]
 pub struct GMPTransaction {
     pub cannot_execute: Option<bool>,
     pub cannot_express_execute: Option<bool>,

@@ -17,7 +17,6 @@ macro_rules! impl_to_value {
     };
 }
 
-
 impl_to_value! {
     SearchGMPRequest,
     SearchGMPResponse,

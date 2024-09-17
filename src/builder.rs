@@ -129,4 +129,3 @@ mod tests {
         assert_eq!(request.contract_address, None);
     }
 }
-
