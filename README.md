@@ -1,6 +1,6 @@
 # Axelar GMP
 
-A simple library for using the [Axelar GMP REST API](). Right now only the `searchGMP` method is implemented, and only a subset of the available fields are deserialized in the `GMPTransaction` type contained in the response. Feel free to submit a PR to make it more exhaustive.
+A simple library for using the [Axelar GMP REST API](https://docs.axelarscan.io/gmp). Right now only the `searchGMP` method is implemented, and only a subset of the available fields are deserialized in the `GMPTransaction` type contained in the response. Feel free to submit a PR to make it more exhaustive.
 
 ## Usage
 
