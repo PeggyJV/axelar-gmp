@@ -9,12 +9,12 @@ async fn test_search_gmp() {
     init_logger();
 
     let result = SearchGMPRequestBuilder::default()
-        .from_time(1715400000)
-        .to_time(1715462400)
-        .size(100)
+        .tx_hash("A4EA656045A75F13B113165D14E44253A21B9EE25868A9793187C5CC7B415F71".to_string())
+        .source_chain("sommelier".to_string())
         .build()
         .send()
         .await;
 
+    println!("result: {:?}", result);
     assert!(result.is_ok());
 }
